@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiral Generated</title>
+</head>
+<body>
+    <h1>Spiral and G-code Generated</h1>
+    <p><a href="/download/{{ svg_file }}">Download SVG</a></p>
+    <p><a href="/download/{{ gcode_file }}">Download G-code</a></p>
+    <h2>SVG Visualization</h2>
+    <button id="visualize-btn">Visualize</button>
+    <div id="svg-container">
+    <!-- SVG will be embedded here -->
+    </div>
+
+<script>
+    document.getElementById('visualize-btn').addEventListener('click', function() {
+        fetch('/visualize')
+            .then(response => response.text())
+            .then(svgData => {
+                const svgContainer = document.getElementById('svg-container');
+                svgContainer.innerHTML = svgData;
+            });
+    });
+</script>
+</body>
+</html>
