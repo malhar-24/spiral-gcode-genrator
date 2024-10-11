@@ -59,7 +59,7 @@ def generate_spiral(num_turns, spacing, num_points, scale_factor, degree, feed_r
                 # Scale the points by the scale factor
                 start = segment.start * scale_factor
                 end = segment.end * scale_factor
-                gcode.append(f"G21\nG90\nG0 X{start.real:.3f} Y{start.imag:.3f}\nM40\nG4 P{delay_start }")
+                gcode.append(f"G21\nG90\nG0 X{start.real:.3f} Y{start.imag:.3f}\nM10\nG4 P{delay_start }")
                 gcode.append(f"G1 F{feed_rate} ")
                 break
             break
@@ -69,7 +69,7 @@ def generate_spiral(num_turns, spacing, num_points, scale_factor, degree, feed_r
 
                 gcode.append(f"G1 X{start.real:.3f} Y{start.imag:.3f}")
 
-        gcode.append(f"G4 P0\nM41\nM50\nG4 P{delay_end}\nM51\nG1 X0 Y0")
+        gcode.append(f"G4 P0\nM11\nM20\nG4 P{delay_end}\nM21\nG1 X0 Y0")
         return gcode
 
     # Convert paths to G-code
