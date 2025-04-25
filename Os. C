@@ -1,0 +1,134 @@
+EXPERIMENT 11
+
+Code :
+
+#include<stdio.h>
+
+int main()
+{
+int queue[20], n, head, i, j, k, seek=0, max, diff;
+float avg;
+
+printf("Enter the max range of disk : \n");
+scanf("%d", &max);
+
+printf("Enter the size of queue request : \n");
+scanf("%d", &n);
+
+printf("Enter the queue of disk positions to be read : ");
+for(i=1;i<=n;i++)
+scanf("%d", &queue[i]);
+
+printf("Enter the initial head position : \n");
+scanf("%d", &head);
+
+queue[0]=head;
+for(j=0;j<=n-1;j++)
+{
+diff=abs(queue[j+1]-queue[j]);
+seek+=diff;
+printf("Disk head moves from %d to %d with seek %d\n", queue[j], queue[j+1], diff);
+}
+
+printf("Total seek time is %d\n", seek);
+avg=seek/(float)n;
+printf("Average seek time is %f\n", avg);
+return 0;
+}
+
+
+EXPERIMENT 10
+
+Code :
+
+#include<stdio.h>
+
+int main()
+{
+int i, j, n, a[50], frame[10], no, k, avail, count=0;
+
+printf("\n ENTER THE NUMBER OF PAGES : ");
+scanf("%d", &n);
+
+printf("\n ENTER THE PAGE NUMBER : \n");
+for(i=1;i<=n;i++)
+scanf("%d", &a[i]);
+
+printf("\n ENTER THE NUMBER OF FRAMES : ");
+scanf("%d", &no);
+
+for(i=0;i<no;i++)
+frame[i]= -1;
+
+j=0;
+printf("REFERENCE STRING \t PAGE FRAMES\n");
+for(i=1;i<=n;i++)
+{
+printf("%d\t\t",a[i]);
+avail=0;
+for(k=0;k<no;k++)
+if(frame[k]==a[i])
+avail=1;
+if (avail==0)
+{
+frame[j]=a[i];
+j=(j+1)%no;
+count++;
+for(k=0;k<no;k++)
+printf("%d\t", frame[k]);
+}
+printf("\n");
+}
+
+printf("\n PAGE FAULT :%d", count);
+return 0;
+}
+
+
+
+EXPERIMENT 09
+
+Code : 
+
+#include<stdio.h>
+void main()
+{
+int bsize[10], psize[10], bno, pno, flags[10], allocation[10], i, j; 
+for(i=0;i<10;i++)
+{
+flags[i]=0;
+allocation[i]=-1;
+}
+printf("\n\n Enter no. of blocks : ");
+scanf("%d", &bno);
+printf("\n Enter size of each block : \n");
+for(i=0;i<bno;i++)
+scanf("%d", &bsize[i]);
+printf("\n Enter no. of processes : ");
+scanf("%d", &pno);
+printf("\n Enter size of each process :\n");
+for(i=0;i<pno;i++)
+scanf("%d", &psize[i]);
+for(i=0;i<pno;i++)
+for(j=0;j<bno;j++)
+if(flags[j]==0 && bsize[j]>=psize[i])
+{
+allocation[j] = i; 
+flags[j] = 1;
+break;
+}
+printf("\n BLOCK NO.\tSIZE\t\tPROCESS NO.\t\tSIZE"); 
+for(i=0;i<bno;i++)
+{
+printf("\n%d\t\t%d\t\t", i+1, bsize[i]);
+if(flags[i] == 1)
+    printf("%d\t\t\t%d", allocation[i]+1, psize[allocation[i]]);
+else
+    printf("Not allocated !!");
+}
+}
+
+
+
+
+EXPERIMENT 08
